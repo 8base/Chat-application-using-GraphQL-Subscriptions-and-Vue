@@ -463,7 +463,7 @@ export default {
       /* Delete participant */
       this.deleteUser();
       /* Set me to default */
-      this.me = { me: { email: '' } },
+      this.me = { email: '' };
     }
   }
 
