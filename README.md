@@ -270,9 +270,9 @@ At this point, we have **everything we need to build our public chat room**! All
 
 _Note: Beauty is in the eye of the beholder... and because of that only the minimum styling needed to make the component functional have been added._
 
-##### Component <script>
+##### Component script
 
-First thing we'll need in our script tag is to import our modules, simple styling, and GraphQL queries. All of those artifacts exist in our `src/utils` directory. Insert the following imports after the opening `<script>` tag in `GroupChat.vue`.
+First thing we'll need in our script tag is to import our modules, simple styling, and GraphQL queries. All of those artifacts exist in our `src/utils` directory. Insert the following imports after the opening `\<script\>` tag in `GroupChat.vue`.
 
 ```js
 import Api from "./utils/api";
@@ -471,9 +471,9 @@ export default {
 }
 ```
 
-### Component <template>
+### Component template
 
-Last but not least, we have our component `<template>`. There are 1000's of great tutorials out there on how to build beautiful UIs. **This is not one of those tutorials**.
+Last but not least, we have our component `\<template\>`. There are 1000's of great tutorials out there on how to build beautiful UIs. **This is not one of those tutorials**.
 
 The following template meets the minimum spec of a group chat app. It's really up to you to go in and make this thing beauriful. That said, let's quickly walk through the key markup that we've implimented here. As always, please read the in-line code comments.
 
