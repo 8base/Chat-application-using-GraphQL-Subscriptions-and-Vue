@@ -59,7 +59,7 @@ The last thing we must do to set up our backend (...seriously ) is to update our
 
 In the 8base Console, navigate to `App Services > Roles > Guest`. Update the permissions set for both `Messages` and `Users` to be either **on** or **All Records** (as seen in the screen shot below). Essentially, the `Guest` role defines what a user making an un-authenticated request to the API is permitted to do.
 
-![Setting public permissions in 8base console for public group chat vue app](./.assets/chat-permissions.png)
+![Setting public permissions in 8base console for public group chat vue app](./assets/chat-permissions.png)
 
 ### Writing the GraphQL Queries
 
