@@ -20,7 +20,7 @@ To move things along, you can [clone the starter project](https://link.com). The
 
 ```sh
 # Clone project
-git clone <URL> group-chat
+git clone https://github.com/8base/Chat-application-using-GraphQL-Subscriptions-and-Vue.git group-chat
 # Move into directory
 cd group-chat
 # Install dependencies
@@ -463,9 +463,9 @@ export default {
       /* Delete participant */
       this.deleteUser();
       /* Set me to default */
-      this.me = { me: { email: '' } },
+      this.me = { me: { email: '' } }
     }
-  }
+  },
 
   // lifecycle hooks ...
 }
