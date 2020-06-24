@@ -490,7 +490,7 @@ The following template meets the minimum spec of a group chat app. It's really u
           Since we're using subscriptions that run in real-time, our
           numbe of user currently online will dynamically adjust.
          -->
-        {{ participants.length }} Online Users
+        {{ users.length }} Online Users
         <!-- 
           A user can leave the chat by executing the 
           closeChat function.
