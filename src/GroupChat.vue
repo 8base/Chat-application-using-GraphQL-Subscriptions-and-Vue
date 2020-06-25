@@ -10,7 +10,7 @@
           Since we're using subscriptions that run in real-time, our
           numbe of user currently online will dynamically adjust.
          -->
-        {{ participants.length }} Online Users
+        {{ users.length }} Online Users
         <!-- 
           A user can leave the chat by executing the 
           closeChat function.
@@ -25,11 +25,11 @@
       <div
         :key="index"
         v-for="(msg, index) in messages"
-        :class="['msg', { me: msg.participant.id === me.id }]"
+        :class="['msg', { me: msg.author.id === me.id }]"
       >
         <p>{{ msg.content }}</p>
         <small
-          ><strong>{{ msg.participant.email }}</strong> {{ msg.createdAt
+          ><strong>{{ msg.author.email }}</strong> {{ msg.createdAt
           }}</small
         >
       </div>
