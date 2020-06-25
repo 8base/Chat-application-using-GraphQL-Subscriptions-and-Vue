@@ -2,7 +2,7 @@
 
 In this tutorial, we're going to build a public chat room! To accomplish that goal we'll need to learn how to use GraphQL subscriptions. By using subscriptions, we'll be able to listen for real-time updates via the 8base GraphQL API.
 
-The Public Chat Room Component we're building can be used in any Vue.js app. Additionally, regardless of the framework you're working with, most of the code and concepts can be re-purposed to any Javascript app! So, let's get going.
+The Public Chat Room Component we're building can be used in any Vue.js app. Regardless of the framework that you're working with, most of the code and concepts can be re-purposed to any Javascript app! So, let's get going.
 
 ### Technologies
 
@@ -23,11 +23,11 @@ To move things along, you can [clone the starter project](https://link.com). The
 git clone https://github.com/8base/Chat-application-using-GraphQL-Subscriptions-and-Vue.git group-chat
 # Move into directory
 cd group-chat
-# Install dependencies
+# Install the dependencies
 yarn
 ```
 
-In order to communicate with the backend, there are 3 environment variables we must set. To ensure that our Vue app makes them available, create a `.env.local` file in the root directory with the following command.
+To communicate with the backend, there are 3 environment variables we must set. To ensure that our Vue app makes them available, create a `.env.local` file in the root directory with the following command.
 
 ```sh
 echo 'VUE_APP_8BASE_WORKSPACE_ID=<YOUR_8BASE_WORKSPACE_ID>
@@ -40,7 +40,7 @@ Both the `VUE_APP_8BASE_API_ENDPOINT` and `VUE_APP_8BASE_WS_ENDPOINT` values are
 
 ### Importing the Schema
 
-With the front-end application setup, we now need to provision the backend. At the root of this repo you should find a `chat-schema.json` file. To import it to the workspace, we'll simply need to install and authenticate the 8base command line and then import the schema file.
+With the front-end application setup, we now need to set up the backend. At the root of this directory, you should find a `chat-schema.json` file. To import it to the workspace, we'll simply need to install and authenticate the 8base command line and then import the schema file.
 
 ```sh
 # Install 8base CLI
@@ -57,13 +57,13 @@ Admittedly, we're importing one table that has one field and one relationship. I
 
 The last thing we must do to set up our backend (...seriously ) is to update our API permissions. Since we're not tackling authentication in this tutorial, we must enable public access to the GraphQL API.
 
-In the 8base Console, navigate to `App Services > Roles > Guest`. Update the permissions set for both `Messages` and `Users` to be either **on** or **All Records** (as seen in the screen shot below). Essentially, the `Guest` role defines what a user making an un-authenticated request to the API is permitted to do.
+In the 8base Console, navigate to `App Services > Roles > Guest`. Update the permissions set for both `Messages` and `Users` to be either **on** or **All Records** (as seen in the screenshot below). Essentially, the `Guest` role defines what a user making an unauthenticated request to the API is permitted to do.
 
 ![Setting public permissions in 8base console for public group chat vue app](./assets/chat-permissions.png)
 
 ### Writing the GraphQL Queries
 
-At this point, we're going to define and write out all of the GraphQL queries that we'll be needing for our chat component. This will help us understand what data we will be reading, creating, and listenin to (websockets) using the API.
+At this point, we're going to define and write out all of the GraphQL queries that we'll be needing for our chat component. This will help us understand what data we will be reading, creating, and listening to (WebSockets) using the API.
 
 The following code should be put in a file located at `src/utils/graphql.js`. Make sure to read the comments above each exported constant to understand what each query is accomplishing.
 
@@ -154,9 +154,9 @@ export const MessagesSubscription = gql`
 
 ### Creating the Apollo and Subscription Client
 
-With our GraphQL queries written it's time to set up our client modules. Otherwise, we can't run the queries!
+With our GraphQL queries written, it's time to set up our client modules. Otherwise, we can't run the queries!
 
-First, let's tackle the API client. For this we'll be using `ApolloClient` with its required defaults. To the `createHttpLink` we'll be supplying our fully formed workspace endpoint. This code should be place at `src/utils/api.js`
+First, let's tackle the API client. For this, we'll be using `ApolloClient` with its required defaults. To `createHttpLink` we supply our fully formed workspace endpoint. This code should be placed in `src/utils/api.js`
 
 _Note: To learn more about the options available when configuring ApolloClient, [please reference their documentation](https://www.apollographql.com/docs/react/get-started/)._
 
@@ -199,7 +199,7 @@ const subscriptionClient = new SubscriptionClient(
     reconnect: true,
     connectionParams: {
       /**
-       * WorkspaceID MUST be set or the Websocket Endpoint wont be able to
+       * WorkspaceID MUST be set or the Websocket Endpoint won't be able to
        * map the request to the appropriate workspace
        */
       workspaceId: VUE_APP_8BASE_WORKSPACE_ID,
@@ -234,7 +234,7 @@ export default {
      */
     const { unsubscribe } = result.subscribe({
       /**
-       * Whenever an event is recieved, the result is passed
+       * Whenever an event is received, the result is passed
        * to the developer specified data callback.
        */
       next(result) {
@@ -243,7 +243,7 @@ export default {
         }
       },
       /**
-       * Whenever an error is recieved, the error is passed
+       * Whenever an error is received, the error is passed
        * to the developer specified error callback.
        */
       error(e) {
@@ -270,9 +270,9 @@ At this point, we have **everything we need to build our public chat room**! All
 
 _Note: Beauty is in the eye of the beholder... and because of that only the minimum styling needed to make the component functional have been added._
 
-##### Component script
+##### Vue component script
 
-First thing we'll need in our script tag is to import our modules, simple styling, and GraphQL queries. All of those artifacts exist in our `src/utils` directory. Insert the following imports after the opening `\<script\>` tag in `GroupChat.vue`.
+The first thing we'll need in our script tag is to import our modules, simple styling, and GraphQL queries. All of those artifacts exist in our `src/utils` directory. Insert the following imports after the opening `\<script\>` tag in `GroupChat.vue`.
 
 ```js
 import Api from "./utils/api";
@@ -292,7 +292,7 @@ import {
 import "../assets/styles.css";
 ```
 
-##### Component data
+##### Vue component data
 
 We can define what data properties we want in our component's `data` function. If we think about it, all we need is a way to store chat users, messages, who the "current" user is, and any message that's not yet sent. These properties can be added like so:
 
@@ -311,9 +311,9 @@ export default {
 };
 ```
 
-##### Lifecycle hooks
+##### Vue component lifecycle hooks
 
-Our lifecycle hooks execute at different moments in the Vue component's "life". For example, when it's `mounted` or `updated`. In our case, we'll only really care about when it's `created` and `beforeDestroy`. At those times, we'll want to either create chat subscriptions or close chat scriptions. The methods will work using the following code.
+Our lifecycle hooks execute at different moments in the Vue component's "life". For example, when it's `mounted` or `updated`. In our case, we'll only really care about when it's `created` and `beforeDestroy`. At those times, we'll want to either create chat subscriptions or close chat subscriptions. The methods will work using the following code.
 
 ```js
 // imports ...
@@ -326,13 +326,13 @@ export default {
    */
   created() {
     /**
-     * Create Subscription that triggers event when user is created or deleted
+     * Create Subscription that triggers an event when a user is created or deleted
      */
     Wss.subscribe(UsersSubscription, {
       data: this.handleUser,
     });
     /**
-     * Create Subscription that triggers event when message is created
+     * Create Subscription that triggers an event when a message is created
      */
     Wss.subscribe(MessagesSubscription, {
       data: this.addMessage,
@@ -347,7 +347,7 @@ export default {
       this.messages = data.messagesList.items;
     });
     /**
-     * Callback executed on page refresh to close chat
+     * Callback executed on page refresh to close the chat
      */
     window.onbeforeunload = this.closeChat;
   },
@@ -360,13 +360,13 @@ export default {
 };
 ```
 
-##### Component methods
+##### Vue component methods
 
 Not only have we created several methods above that don't exist yet... we need to create the specific methods intended to handle each API call/response (`createMessage`, `addMessage`, `closeChat`, etc.). These will all get stored on the methods object of our component.
 
 One thing worth noting is that on most of our mutations we are not waiting for or handling responses. The reason for this is that we have subscriptions running that are listening for those mutations to be run. Once run successfully, it's the subscription that is handling the response data.
 
-Most of these methods are pretty self explanatory! Regardless, please read the comments in the following code.
+Most of these methods are pretty self-explanatory! Regardless, please read the comments in the following code.
 
 ```js
 // imports ...
@@ -396,8 +396,8 @@ export default {
       });
     },
     /**
-     * Our users subscription listing to both the create and update events, and
-     * therefore we need to choose the apprpriate method to handle the response
+     * Our user's subscription listens to both the create and update events,
+     * therefore, we need to choose the appropriate method to handle the response
      * based on the mutation type.
      *
      * Here, we have an object that looks up the mutation type by name, returns
@@ -425,7 +425,7 @@ export default {
       this.users.push(user);
     },
     /**
-     * Removes user from the users array by ID.
+     * Removes a user from the users' array by ID.
      */
     removeUser(user) {
       this.users = this.users.filter(
@@ -443,7 +443,7 @@ export default {
       }).then(() => (this.newMessage = ""));
     },
     /**
-     * Our messages subscription only listens to the create event. Therefore, all we
+     * Our messages' subscription only listens to the create event. Therefore, all we
      * need to do is push it into our messages array.
      */
     addMessage({
@@ -471,11 +471,11 @@ export default {
 }
 ```
 
-### Component template
+### Vue component template
 
 Last but not least, we have our component `\<template\>`. There are 1000's of great tutorials out there on how to build beautiful UIs. **This is not one of those tutorials**.
 
-The following template meets the minimum spec of a group chat app. It's really up to you to go in and make this thing beauriful. That said, let's quickly walk through the key markup that we've implimented here. As always, please read the in-line code comments.
+The following template meets the minimum spec of a group chat app. It's really up to you to go in and make this thing beautiful. That said, let's quickly walk through the key markup that we've implemented here. As always, please read the in-line code comments.
 
 ```html
 <template>
@@ -549,13 +549,13 @@ The following template meets the minimum spec of a group chat app. It's really u
 
 ## Wrap up and Testing
 
-Believe it or not, the whole Public Chat Room is now built. If you open it on you localhost network, you'll be able to start submitting messages. However, to prove that it's a real group chat, open several windows and watch the conversation flow!
+Believe it or not, the whole Public Chat Room is now built. If you open it on your localhost network, you'll be able to start submitting messages. However, to prove that it's a real group chat go ahead and open several windows and watch the conversation flow!
 
 In this tutorial, you learned how to initialize `ApolloClient` and `SubscriptionClient` to effectively execute GraphQL queries, mutations, and subscriptions to an 8base workspace. Also, maybe you learned a little bit about Vue.js :)
 
-Whether you're working on a web/mobile game, messaging and notification apps, or other projects that have real-time data requirement, subscriptions are an amazing tool to leverage. We barely scratched the surface in this tutorial!
+Whether you're working on a web/mobile game, messaging and notification apps, or other projects that have real-time data requirements, subscriptions are an amazing tool to leverage. We barely scratched the surface in this tutorial!
 
-Based on the success of this tutorial, we will develop it further to include user authentication, private channels and messages, file uploads, and advanced chat app features. **So please let us know if you found this valueable and want more!** Otherwise, the following resources are great for follow-on learning.
+Based on the success of this tutorial, we will develop it further to include user authentication, private channels and messages, file uploads, and advanced chat app features. **So please let us know if you found this valuable and want more!** Otherwise, the following resources are great for follow-on learning.
 
 * [Vue Lifecylce Diagram](https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram)
 * [Apollo Client Docs](https://www.apollographql.com/docs/react/api/apollo-client/)
