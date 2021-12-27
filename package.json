@@ -15,7 +15,7 @@
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.3",
     "isomorphic-ws": "^4.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.1",
     "sass-loader": "^8.0.2",
     "subscriptions-transport-ws": "^0.9.16",
     "vue": "^2.6.11",
